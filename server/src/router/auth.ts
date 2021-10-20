@@ -1,49 +1,13 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
+import express from "express";
+import { User } from "../models/users";
+import cookieParser from "cookie-parser";
+
 const router = express.Router();
 
-require('../DB/conn');
-const bcrypt = require('bcryptjs');
-const User = require('../model/users');
-const authenticate = require('../middleware/authenticate');
-const cookieParser = require("cookie-parser");
 router.use(cookieParser());
 router.get('/', (req,res) => {
     res.send(`Hello from server auth.js`);
 });
-
-// using promises
-
-// router.post('/register', (req,res) =>{
-
-//     const {name, email, phone, designation, password, cpassword} = req.body;
-  
-//     if(!name || !email || !phone || !designation || !password || !cpassword)
-//     {
-//         return res.status(422).json({ error: "Plz fill all the fields"});
-//     }
-
-    // check for repeated email
-
-//     User.findOne({email: email})
-//         .then((userExist) =>{
-
-//             if (userExist)
-//             {
-//                 return res.status(422).json({ error: "Email already Registered"});
-//             }
-
-//             const user = new User({name, email, phone, designation, password, cpassword});
-//             user.save().then(() =>{
-//                 res.status(201).json({ message: "User Registered !"});
-//             }).catch((err) => res.status(500).json({ error: "Failed to register"}));
-//         }).catch(err => { console.log(err); });
-
-
-        
-
-// });
-
 
 router.post('/register', async (req,res) =>{
 
