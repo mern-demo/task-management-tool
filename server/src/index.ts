@@ -1,16 +1,19 @@
 import express from "express";
+import dotenv from "dotenv";
 
-// const dotenv = require('dotenv');
-// const mongoose = require('mongoose');
+import{ connn } from "./DB/conn";
+
+dotenv.config({path: './config.env'});
+const PORT = process.env.PORT;
+
 const app = express();
-// const cookieParser = require('cookie-parser');
-const PORT = 3000
-
 
 app.use(express.json());
 
 app.get('/', (req,res) => {
     res.send(`Hello World from the server`);
+    connn();
+
 });
 
 
