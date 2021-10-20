@@ -3,7 +3,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
-const userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -35,8 +35,7 @@ userSchema.pre('save', async function (next: any){
 userSchema.methods.generateAuthToken = async function () {
 
     try{
-            let token = jwt.sign({_id: this.id}, process.env.SECRET_KEY);
-            return token;
+            return jwt.sign({_id: this.id}, process.env.SECRET_KEY);
     }
 
     catch(err){

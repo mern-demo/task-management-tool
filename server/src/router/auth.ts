@@ -2,7 +2,7 @@ import express from "express";
 import { User } from "../models/users";
 import cookieParser from "cookie-parser";
 import { authenticate } from "../middleware/authenticate";
-
+import bcrypt from "bcrypt";
 const router = express.Router();
 
 router.use(cookieParser());
@@ -76,8 +76,7 @@ router.post('/login', async (req,res) => {
 
     try{
 
-        const userLogin = await User.findOne({email: email});
-        //console.log(userLogin);
+        const userLogin = User.findOne({email: email});
 
 
         if(userLogin)
@@ -97,7 +96,6 @@ router.post('/login', async (req,res) => {
             else
             {
                 res.json({message: "User Logged In Successfully"});
-                //console.log(userLogin);
             }
 
         }
@@ -133,7 +131,6 @@ router.get("/getData", authenticate, async (req, res) => {
 router.get("/logout", async (req, res) => {
     console.log("logged out successfully !");
     res.clearCookie('jwtoken');
-    //res.status(200).send('user Logged out');
     return res.status(200).redirect('/login');
 
 })
