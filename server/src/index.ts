@@ -1,9 +1,10 @@
-//const dotenv = require('dotenv');
-//const mongoose = require('mongoose');
-const express = require('express');
+import express from "express";
+
+// const dotenv = require('dotenv');
+// const mongoose = require('mongoose');
 const app = express();
-//const cookieParser = require('cookie-parser');
-PORT = 3000
+// const cookieParser = require('cookie-parser');
+const PORT = 3000
 
 
 app.use(express.json());
