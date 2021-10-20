@@ -1,6 +1,7 @@
 import express from "express";
 import { User } from "../models/users";
 import cookieParser from "cookie-parser";
+import authenticate from "../middleware/authenticate";
 
 const router = express.Router();
 
