@@ -6,10 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const conn_1 = require("./DB/conn");
+const auth_1 = require("./router/auth");
 dotenv_1.default.config({ path: './config.env' });
 const PORT = process.env.PORT;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+// we link the router files to make our route easy
+app.use(auth_1.router);
 app.get('/', (req, res) => {
     res.send(`Hello World from the server`);
     (0, conn_1.connn)();

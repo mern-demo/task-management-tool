@@ -2,14 +2,14 @@ import mongoose from 'mongoose';
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
-export interface user {
+export interface Usertype {
     name: string;
     email: string;
     password: string;
     generateAuthToken: any;
 }
 
-export const userSchema = new mongoose.Schema<user>({
+export const userSchema = new mongoose.Schema<Usertype>({
 
     name: {
         type: String,
@@ -19,7 +19,7 @@ export const userSchema = new mongoose.Schema<user>({
         type: String,
         required: true
     },
-   
+
     password: {
         type: String,
         required: true

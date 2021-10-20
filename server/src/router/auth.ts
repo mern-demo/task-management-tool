@@ -3,9 +3,9 @@ import { User } from "../models/users";
 import cookieParser from "cookie-parser";
 import { authenticate } from "../middleware/authenticate";
 import bcrypt from "bcrypt";
-import { about } from "../interfaces/requests";
+import { About } from "../interfaces/requests";
 
-const router = express.Router();
+export const router = express.Router();
 
 router.use(cookieParser());
 router.get('/', (req,res) => {
@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 router.post('/register', async (req,res) =>{
 
     const {name, email, phone, designation, password, cpassword} = req.body;
-  
+
     if(!name || !email || !phone || !designation || !password || !cpassword)
     {
         return res.status(422).json({ error: "Plz fill all the fields"});
@@ -25,14 +25,14 @@ router.post('/register', async (req,res) =>{
 
    try
    {
-   const userExist = await User.findOne({email: email});
+   const userExist = await User.findOne({email});
 
-    
+
         if (userExist)
         {
             return res.status(422).json({ error: "Email already Registered"});
         }
-        if(password != cpassword)
+        if(password !== cpassword)
         {
             return res.status(422).json({ error: "Password and Confirm Password should be same"});
         }
@@ -51,18 +51,18 @@ router.post('/register', async (req,res) =>{
         }
 
 
-    
-    
+
+
 
    }
 
    catch(err)
 
     {
-         console.log(err); 
+         console.log(err);
     }
 
-        
+
 
 });
 
@@ -78,7 +78,7 @@ router.post('/login', async (req,res) => {
 
     try{
 
-        const userLogin = await User.findOne({email: email});
+        const userLogin = await User.findOne({email});
 
 
         if(userLogin)
@@ -107,7 +107,7 @@ router.post('/login', async (req,res) => {
             return res.status(400).json({ message: "Invalid Credentials"});
 
         }
-        
+
 
 
     }
@@ -120,12 +120,12 @@ router.post('/login', async (req,res) => {
 
 
 
-router.get("/about", authenticate, async (req:about, res) => {
+router.get("/about", authenticate, async (req:About, res) => {
     res.send(req.rootUser)
 })
-// get data 
+// get data
 
-router.get("/getData", authenticate, async (req:about, res) => {
+router.get("/getData", authenticate, async (req:About, res) => {
     res.send(req.rootUser)
 })
 
@@ -136,4 +136,3 @@ router.get("/logout", async (req, res) => {
     return res.status(200).redirect('/login');
 
 })
-module.exports= router;
