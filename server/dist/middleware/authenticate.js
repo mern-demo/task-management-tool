@@ -14,13 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticate = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const users_1 = require("../models/users");
+const Users_1 = require("../models/Users");
 const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = req.cookies.jwtoken;
         const verifytoken = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
         // validate token
-        const rootUser = yield users_1.User.findOne({ _id: verifytoken });
+        const rootUser = yield Users_1.User.findOne({ _id: verifytoken });
         if (!rootUser) {
             throw new Error('User not found');
         }

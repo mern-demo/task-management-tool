@@ -50,4 +50,4 @@ exports.userSchema.methods.generateAuthToken = function () {
     });
 };
 exports.User = mongoose_1.default.model('USER', exports.userSchema);
-//# sourceMappingURL=users.js.map
+//# sourceMappingURL=Users.js.map

@@ -16,7 +16,6 @@ app.use(router);
 
 app.get('/', (req,res) => {
     res.send(`Hello World from the server`);
-    connn();
 
 });
 

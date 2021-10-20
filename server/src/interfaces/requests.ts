@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Usertype } from "../models/users"
+import { Usertype } from "../models/Users"
 
 export interface About extends Request {
     rootUser: Usertype;

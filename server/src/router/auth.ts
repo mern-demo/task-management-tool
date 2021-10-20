@@ -1,10 +1,11 @@
 import express from "express";
-import { User } from "../models/users";
+import { User } from "../models/Users";
 import cookieParser from "cookie-parser";
 import { authenticate } from "../middleware/authenticate";
 import bcrypt from "bcrypt";
 import { About } from "../interfaces/requests";
-
+import{ connn } from "../DB/conn";
+connn();
 export const router = express.Router();
 
 router.use(cookieParser());
@@ -14,11 +15,13 @@ router.get('/', (req,res) => {
 
 router.post('/register', async (req,res) =>{
 
-    const {name, email, phone, designation, password, cpassword} = req.body;
+    const {name, email, password, cpassword} = req.body;
 
-    if(!name || !email || !phone || !designation || !password || !cpassword)
+    if(!name || !email || !password || !cpassword)
     {
+        console.log(req);
         return res.status(422).json({ error: "Plz fill all the fields"});
+
     }
 
     // check for repeated email
@@ -37,7 +40,7 @@ router.post('/register', async (req,res) =>{
             return res.status(422).json({ error: "Password and Confirm Password should be same"});
         }
 
-        const user = new User({name, email, phone, designation, password, cpassword});
+        const user = new User({name, email, password});
 
         const userRegister = await user.save();
 
