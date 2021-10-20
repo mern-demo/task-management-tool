@@ -3,6 +3,7 @@ import { User } from "../models/users";
 import cookieParser from "cookie-parser";
 import { authenticate } from "../middleware/authenticate";
 import bcrypt from "bcrypt";
+
 const router = express.Router();
 
 router.use(cookieParser());
@@ -76,7 +77,7 @@ router.post('/login', async (req,res) => {
 
     try{
 
-        const userLogin = User.findOne({email: email});
+        const userLogin = await User.findOne({email: email});
 
 
         if(userLogin)

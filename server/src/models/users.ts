@@ -3,7 +3,14 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
-export const userSchema = new mongoose.Schema({
+interface user {
+    name: string;
+    email: string;
+    password: string;
+    generateAuthToken: any;
+}
+
+export const userSchema = new mongoose.Schema<user>({
 
     name: {
         type: String,
