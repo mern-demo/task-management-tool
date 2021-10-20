@@ -3,6 +3,7 @@ import { User } from "../models/users";
 import cookieParser from "cookie-parser";
 import { authenticate } from "../middleware/authenticate";
 import bcrypt from "bcrypt";
+import { about } from "../interfaces/requests";
 
 const router = express.Router();
 
@@ -119,12 +120,12 @@ router.post('/login', async (req,res) => {
 
 
 
-router.get("/about", authenticate, async (req, res) => {
+router.get("/about", authenticate, async (req:about, res) => {
     res.send(req.rootUser)
 })
 // get data 
 
-router.get("/getData", authenticate, async (req, res) => {
+router.get("/getData", authenticate, async (req:about, res) => {
     res.send(req.rootUser)
 })
 

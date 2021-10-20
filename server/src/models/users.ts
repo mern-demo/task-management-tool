@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
-import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 
-interface user {
+export interface user {
     name: string;
     email: string;
     password: string;
